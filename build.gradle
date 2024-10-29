@@ -71,4 +71,10 @@ tasks.jacocoTestReport {
 		csv.required.set(false)
 		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 	}
+	classDirectories.setFrom(files(classDirectories.files.collect {
+		fileTree(dir: it, exclude: [
+				"**/IssuerApplication.class",
+				"**/DefaultSecurityConfig.class",
+		])
+	}))
 }
