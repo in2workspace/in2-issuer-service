@@ -27,8 +27,8 @@ sonar {
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.coverage.exclusions",
 				"**/IssuerApplication.java, " +
-						"**/DefaultSecurityConfig.java"
-
+						"**/DefaultSecurityConfig.java, " +
+						"**/TenantRepository.java, "
 	}
 }
 
@@ -79,6 +79,7 @@ tasks.jacocoTestReport {
 		fileTree(dir: it, exclude: [
 				"**/IssuerApplication.class",
 				"**/DefaultSecurityConfig.class",
+				"**/TenantRepository.class"
 		])
 	}))
 }

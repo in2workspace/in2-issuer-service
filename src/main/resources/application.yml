@@ -1,6 +1,20 @@
 spring:
   application:
     name: IN2 Issuer Service
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    url:
+    locations: classpath:db/migration
 
 issuer-ui:
   url: http://localhost:4200
