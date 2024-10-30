@@ -1,6 +1,7 @@
 package es.in2.issuer.config.impl;
 
-import es.in2.issuer.config.properties.IssuerUiProperties;
+import es.in2.issuer.shared.config.impl.IssuerUiConfigImpl;
+import es.in2.issuer.shared.config.properties.IssuerUiProperties;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

@@ -1,12 +1,12 @@
 package es.in2.issuer.service;
 
-import es.in2.issuer.exception.TenantAlreadyExistException;
-import es.in2.issuer.model.dto.TenantDetails;
-import es.in2.issuer.model.dto.TenantRequest;
-import es.in2.issuer.model.dto.TenantResponse;
-import es.in2.issuer.model.entity.Tenant;
-import es.in2.issuer.repository.TenantRepository;
-import es.in2.issuer.service.impl.TenantServiceImpl;
+import es.in2.issuer.backoffice.exception.TenantAlreadyExistException;
+import es.in2.issuer.backoffice.model.dto.TenantDetails;
+import es.in2.issuer.backoffice.model.dto.TenantRequest;
+import es.in2.issuer.backoffice.model.dto.TenantResponse;
+import es.in2.issuer.backoffice.model.entity.Tenant;
+import es.in2.issuer.backoffice.repository.TenantRepository;
+import es.in2.issuer.backoffice.service.impl.TenantServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
-import static es.in2.issuer.exception.ErrorConstantsMessage.TENANT_NOT_FOUND_ERROR_MESSAGE;
+import static es.in2.issuer.backoffice.exception.handler.ErrorConstantsMessage.TENANT_NOT_FOUND_ERROR_MESSAGE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
