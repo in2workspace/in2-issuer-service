@@ -21,7 +21,7 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public JsonNode parseJwt(String authorizationHeader) {
         try {
-            SignedJWT parsedJwt = SignedJWT.parse(authorizationHeader);
+            var parsedJwt = SignedJWT.parse(authorizationHeader);
             return objectMapper.readTree(parsedJwt.getPayload().toString());
         } catch (Exception e) {
             log.warn("ERROR: {}", e.getMessage());
