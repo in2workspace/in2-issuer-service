@@ -3,7 +3,7 @@ package es.in2.issuer.factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.Payload;
 import es.in2.issuer.model.dto.Credential;
-import es.in2.issuer.model.dto.LEARVerifiableCredentialEmployee;
+import es.in2.issuer.model.dto.LEARCredentialEmployee;
 import es.in2.issuer.model.enums.SupportedCredentialTypes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +27,10 @@ public class LEARCredentialEmployeeFactory {
 
     public Credential createCredential(Payload payload) {
 
-        LEARVerifiableCredentialEmployee.CredentialSubject.Mandate mandate = objectMapper.convertValue(payload, LEARVerifiableCredentialEmployee.CredentialSubject.Mandate.class);
+        LEARCredentialEmployee.CredentialSubject.Mandate mandate = objectMapper.convertValue(payload, LEARCredentialEmployee.CredentialSubject.Mandate.class);
 
-        List<LEARVerifiableCredentialEmployee.CredentialSubject.Mandate.Power> powerList = mandate.power().stream()
-                .map(power -> LEARVerifiableCredentialEmployee.CredentialSubject.Mandate.Power.builder()
+        List<LEARCredentialEmployee.CredentialSubject.Mandate.Power> powerList = mandate.power().stream()
+                .map(power -> LEARCredentialEmployee.CredentialSubject.Mandate.Power.builder()
                         .id(UUID.randomUUID().toString())
                         .tmfType(power.tmfType())
                         .tmfAction(power.tmfAction())
@@ -39,8 +39,8 @@ public class LEARCredentialEmployeeFactory {
                         .build())
                 .toList();
 
-        LEARVerifiableCredentialEmployee.CredentialSubject learCredentialEmployeeCredentialSubject = LEARVerifiableCredentialEmployee.CredentialSubject.builder()
-                .mandate(LEARVerifiableCredentialEmployee.CredentialSubject.Mandate.builder()
+        LEARCredentialEmployee.CredentialSubject learCredentialEmployeeCredentialSubject = LEARCredentialEmployee.CredentialSubject.builder()
+                .mandate(LEARCredentialEmployee.CredentialSubject.Mandate.builder()
                         .id(mandate.id())
                         .lifeSpan(mandate.lifeSpan())
                         .mandator(mandate.mandator())
@@ -52,7 +52,7 @@ public class LEARCredentialEmployeeFactory {
 
         Instant currentTime = Instant.now();
 
-        LEARVerifiableCredentialEmployee credentialData = LEARVerifiableCredentialEmployee.builder()
+        LEARCredentialEmployee credentialData = LEARCredentialEmployee.builder()
                 .context(List.of("https://www.w3.org/ns/credentials/v2", "https://dome-marketplace.eu/2022/credentials/learcredential/v1"))
                 .id(UUID.randomUUID().toString())
                 .expirationDate(currentTime.plus(30, ChronoUnit.DAYS).toString()) // tod: credential expiration from config
@@ -70,7 +70,7 @@ public class LEARCredentialEmployeeFactory {
                 .issuer(credentialData.issuer())
                 .expirationTime(parseDateToUnixTime(credentialData.expirationDate()))
                 .issuedAt(parseDateToUnixTime(credentialData.issuanceDate()))
-                .credentialData(credentialData)
+                .verifiableCredential(credentialData)
                 .jwtId(UUID.randomUUID().toString())
                 .build();
     }
