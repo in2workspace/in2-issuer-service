@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("issuer/v1/credentials")
+@RequestMapping("/issuer/v1/credentials")
 @RequiredArgsConstructor
 public class CredentialController {
 
@@ -21,7 +21,5 @@ public class CredentialController {
                                  @Valid @RequestBody CredentialRequest credentialRequest) {
         credentialIssuanceWorkflow.issueCredential(authorizationHeader, credentialRequest);
     }
-
-
 
 }
