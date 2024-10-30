@@ -39,18 +39,21 @@ public class LEARCredentialMachineFactory {
                         .build())
                 .toList();
 
+        Instant currentTime = Instant.now();
+
         LEARCredentialMachine.CredentialSubject learCredentialMachineCredentialSubject = LEARCredentialMachine.CredentialSubject.builder()
                 .mandate(LEARCredentialMachine.CredentialSubject.Mandate.builder()
                         .id(mandate.id())
-                        .lifeSpan(mandate.lifeSpan())
+                        .lifeSpan(LEARCredentialMachine.CredentialSubject.Mandate.LifeSpan.builder()
+                                .startDateTime(currentTime.toString())
+                                .endDateTime(currentTime.plus(30, ChronoUnit.DAYS).toString()) // tod: credential expiration from config
+                                .build())
                         .mandator(mandate.mandator())
                         .mandatee(mandate.mandatee())
                         .power(powerList)
                         .signer(mandate.signer())
                         .build())
                 .build();
-
-        Instant currentTime = Instant.now();
 
         LEARCredentialMachine credentialData = LEARCredentialMachine.builder()
                 .context(List.of("https://www.w3.org/ns/credentials/v2", "https://dome-marketplace.eu/2022/credentials/learcredential/v1"))

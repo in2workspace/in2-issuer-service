@@ -22,7 +22,6 @@ public record LEARCredentialEmployee(
             @JsonProperty("mandate") Mandate mandate
     ) {
 
-        @Setter
         @Builder
         public record Mandate(
                 @JsonProperty("id") String id,

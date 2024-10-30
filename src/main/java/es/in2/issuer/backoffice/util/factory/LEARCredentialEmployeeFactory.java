@@ -39,18 +39,21 @@ public class LEARCredentialEmployeeFactory {
                         .build())
                 .toList();
 
+        Instant currentTime = Instant.now();
+
         LEARCredentialEmployee.CredentialSubject learCredentialEmployeeCredentialSubject = LEARCredentialEmployee.CredentialSubject.builder()
                 .mandate(LEARCredentialEmployee.CredentialSubject.Mandate.builder()
-                        .id(mandate.id())
-                        .lifeSpan(mandate.lifeSpan())
+                        .id(UUID.randomUUID().toString())
+                        .lifeSpan(LEARCredentialEmployee.CredentialSubject.Mandate.LifeSpan.builder()
+                                .startDateTime(currentTime.toString())
+                                .endDateTime(currentTime.plus(30, ChronoUnit.DAYS).toString()) // tod: credential expiration from config
+                                .build())
                         .mandator(mandate.mandator())
                         .mandatee(mandate.mandatee())
                         .power(powerList)
                         .signer(mandate.signer())
                         .build())
                 .build();
-
-        Instant currentTime = Instant.now();
 
         LEARCredentialEmployee credentialData = LEARCredentialEmployee.builder()
                 .context(List.of("https://www.w3.org/ns/credentials/v2", "https://dome-marketplace.eu/2022/credentials/learcredential/v1"))
