@@ -1,6 +1,5 @@
 package es.in2.issuer.model.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,15 +12,11 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tenant {
+public class Procedure {
 
     @Id
-    private UUID tenantId;
+    private UUID procedureId;
 
-    @Column(nullable = false)
-    private String tenantName;
-
-    @Column(unique = true, nullable = false)
-    private String tenantDomain;
+    // todo: implement the rest of the class
 
 }
