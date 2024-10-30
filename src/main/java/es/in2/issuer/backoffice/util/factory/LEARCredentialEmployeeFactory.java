@@ -1,10 +1,10 @@
 package es.in2.issuer.backoffice.util.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.Payload;
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
+import jakarta.validation.Payload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

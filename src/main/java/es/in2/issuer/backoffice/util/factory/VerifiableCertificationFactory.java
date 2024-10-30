@@ -1,10 +1,10 @@
 package es.in2.issuer.backoffice.util.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.Payload;
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.VerifiableCertification;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
+import jakarta.validation.Payload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,9 +26,6 @@ public class VerifiableCertificationFactory {
     //private final AppConfiguration appConfiguration; //obtener el default signer de configs
 
     public Credential createCredential(Payload payload) {
-        // 1. Map payload into VerifiableCertificationCredentialSubject
-        // 1.1 generate IDs for compliances
-        // 1.2 Map CredentialSubject and compliances into final Credential
 
         VerifiableCertification verifiableCertificationData = objectMapper.convertValue(payload, VerifiableCertification.class);
 

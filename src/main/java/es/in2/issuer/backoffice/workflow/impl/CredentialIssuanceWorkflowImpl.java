@@ -1,6 +1,8 @@
 package es.in2.issuer.backoffice.workflow.impl;
 
+import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.CredentialRequest;
+import es.in2.issuer.backoffice.util.factory.CredentialFactoryAdapter;
 import es.in2.issuer.shared.security.service.PolicyAuthorizationService;
 import es.in2.issuer.backoffice.workflow.CredentialIssuanceWorkflow;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class CredentialIssuanceWorkflowImpl implements CredentialIssuanceWorkflow {
 
     private final PolicyAuthorizationService policyAuthorizationService;
+    private final CredentialFactoryAdapter credentialFactoryAdapter;
 
     @Override
     public void issueCredential(String authorizationHeader, CredentialRequest credentialRequest) {
@@ -27,6 +30,7 @@ public class CredentialIssuanceWorkflowImpl implements CredentialIssuanceWorkflo
         // 1. Build a Credential with CredentialRequest
             // Create unsigned credential
                 // return a Credential object with the data from the CredentialRequest
+        Credential credential = credentialFactoryAdapter.createCredential(credentialRequest);
 
         // 2. Sign Credential if necessary
             // if OperationMode is A || credential has cryptographic_binding
