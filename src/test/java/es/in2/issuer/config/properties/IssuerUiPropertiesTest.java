@@ -1,5 +1,6 @@
 package es.in2.issuer.config.properties;
 
+import es.in2.issuer.shared.config.properties.IssuerUiProperties;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
