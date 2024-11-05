@@ -2,7 +2,6 @@ package es.in2.issuer.backoffice.util.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.in2.issuer.backoffice.model.dto.Credential;
-import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee;
 import es.in2.issuer.backoffice.model.dto.VerifiableCertification;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
@@ -14,9 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
