@@ -2,9 +2,7 @@ package es.in2.issuer.backoffice.util.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.in2.issuer.backoffice.model.dto.Credential;
-import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee;
-import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee.CredentialSubject.Mandate;
-import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee.CredentialSubject.Mandate.Power;
+import es.in2.issuer.backoffice.model.dto.LEARCredentialMachine;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class LEARCredentialEmployeeFactoryTest {
+class LEARCredentialMachineFactoryTest {
 
     @Mock
     private ObjectMapper objectMapper;
 
     @InjectMocks
-    private LEARCredentialEmployeeFactory factory;
+    private LEARCredentialMachineFactory factory;
 
     @BeforeEach
     void setUp() {
@@ -38,15 +36,17 @@ class LEARCredentialEmployeeFactoryTest {
     @Test
     void createCredential_ShouldReturnValidCredential() {
         // Mock Payload to Mandate
-        Mandate mandateMock = Mandate.builder()
+        LEARCredentialMachine.CredentialSubject.Mandate mandateMock = LEARCredentialMachine.CredentialSubject.Mandate.builder()
                 .id(null)
-                .mandatee(Mandate.Mandatee.builder()
-                        .email("jhon@organization.com")
-                        .firstName("Jhon")
-                        .lastName("Doe")
-                        .mobilePhone("+34666666666")
+                .mandatee(LEARCredentialMachine.CredentialSubject.Mandate.Mandatee.builder()
+                        .contact(LEARCredentialMachine.CredentialSubject.Mandate.Mandatee.Contact.builder().email("email@email.com").phone("12345").build())
+                        .description("description")
+                        .domain("domain")
+                        .serviceName("service name")
+                        .ipAddress("127.0.0.1")
+                        .version("v1.0.0")
                         .build())
-                .mandator(Mandate.Mandator.builder()
+                .mandator(LEARCredentialMachine.CredentialSubject.Mandate.Mandator.builder()
                         .organizationIdentifier("org-1234")
                         .commonName("Dave Foe")
                         .organization("Organization Inc.")
@@ -54,7 +54,7 @@ class LEARCredentialEmployeeFactoryTest {
                         .serialNumber("S-12345")
                         .country("ES")
                         .build())
-                .signer(Mandate.Signer.builder()
+                .signer(LEARCredentialMachine.CredentialSubject.Mandate.Signer.builder()
                         .organizationIdentifier("s-org-4321")
                         .commonName("Name Lastname")
                         .organization("Signer Org")
@@ -62,7 +62,7 @@ class LEARCredentialEmployeeFactoryTest {
                         .serialNumber("S-54321")
                         .country("ES")
                         .build())
-                .power(List.of(Power.builder()
+                .power(List.of(LEARCredentialMachine.CredentialSubject.Mandate.Power.builder()
                         .id("powerId")
                         .tmfType("type")
                         .tmfAction("action")
@@ -71,19 +71,19 @@ class LEARCredentialEmployeeFactoryTest {
                         .build()))
                 .build();
 
-        when(objectMapper.convertValue(any(Payload.class), Mockito.eq(Mandate.class)))
+        when(objectMapper.convertValue(any(Payload.class), Mockito.eq(LEARCredentialMachine.CredentialSubject.Mandate.class)))
                 .thenReturn(mandateMock);
 
         // Call the method under test
         Payload payload = Mockito.mock(Payload.class);
         Credential credential = factory.createCredential(payload);
-        LEARCredentialEmployee learCredentialEmployee = (LEARCredentialEmployee) credential.verifiableCredential();
+        LEARCredentialMachine learCredentialMachine = (LEARCredentialMachine) credential.verifiableCredential();
 
         // Validate Credential contents
         assertNotNull(credential);
         assertEquals("did:elsi" + mandateMock.mandator().organizationIdentifier(), credential.issuer());
-        assertEquals("Jhon", learCredentialEmployee.credentialSubject().mandate().mandatee().firstName());
-        assertEquals(SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue(), learCredentialEmployee.type().get(0));
+        assertEquals("service name", learCredentialMachine.credentialSubject().mandate().mandatee().serviceName());
+        assertEquals(SupportedCredentialTypes.LEAR_CREDENTIAL_MACHINE.getValue(), learCredentialMachine.type().get(0));
 
         // Check expiration and issuance dates within expected time range
         Instant now = Instant.now();
