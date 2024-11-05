@@ -10,11 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
+
+import static es.in2.issuer.backoffice.util.Utils.parseIsoZonedDataTimeToUnixTimestamp;
 
 @Slf4j
 @Component
@@ -22,7 +22,7 @@ import java.util.UUID;
 public class LEARCredentialEmployeeFactory {
 
     private static final String VERIFIABLE_CREDENTIAL_TYPE = "VerifiableCredential";
-    
+
     private final ObjectMapper objectMapper;
 
     public Credential createCredential(Payload payload) {
@@ -62,25 +62,20 @@ public class LEARCredentialEmployeeFactory {
                 .issuanceDate(currentTime.toString())
                 .validFrom(currentTime.toString())
                 .type(List.of(
-                        SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue(), 
+                        SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue(),
                         VERIFIABLE_CREDENTIAL_TYPE))
                 .issuer("did:elsi" + mandate.mandator().organizationIdentifier())
                 .credentialSubject(learCredentialEmployeeCredentialSubject)
                 .build();
 
         return Credential.builder()
-                .notValidBefore(parseDateToUnixTime(credentialData.validFrom()))
+                .notValidBefore(parseIsoZonedDataTimeToUnixTimestamp(credentialData.validFrom()))
                 .issuer(credentialData.issuer())
-                .expirationTime(parseDateToUnixTime(credentialData.expirationDate()))
-                .issuedAt(parseDateToUnixTime(credentialData.issuanceDate()))
+                .expirationTime(parseIsoZonedDataTimeToUnixTimestamp(credentialData.expirationDate()))
+                .issuedAt(parseIsoZonedDataTimeToUnixTimestamp(credentialData.issuanceDate()))
                 .verifiableCredential(credentialData)
                 .jwtId(UUID.randomUUID().toString())
                 .build();
     }
 
-    private long parseDateToUnixTime(String date) {
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-        return zonedDateTime.toInstant().getEpochSecond();
-    }
-    
 }

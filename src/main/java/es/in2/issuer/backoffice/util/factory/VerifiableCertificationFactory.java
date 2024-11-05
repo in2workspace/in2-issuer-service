@@ -9,10 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
+
+import static es.in2.issuer.backoffice.util.Utils.parseIsoZonedDataTimeToUnixTimestamp;
 
 @Slf4j
 @Component
@@ -68,17 +68,13 @@ public class VerifiableCertificationFactory {
                 .build();
 
         return Credential.builder()
-                .notValidBefore(parseDateToUnixTime(finalVerifiableCertificationData.validFrom()))
+                .notValidBefore(parseIsoZonedDataTimeToUnixTimestamp(finalVerifiableCertificationData.validFrom()))
                 .issuer(finalVerifiableCertificationData.issuer().id())
-                .expirationTime(parseDateToUnixTime(finalVerifiableCertificationData.expirationDate()))
-                .issuedAt(parseDateToUnixTime(finalVerifiableCertificationData.issuanceDate()))
+                .expirationTime(parseIsoZonedDataTimeToUnixTimestamp(finalVerifiableCertificationData.expirationDate()))
+                .issuedAt(parseIsoZonedDataTimeToUnixTimestamp(finalVerifiableCertificationData.issuanceDate()))
                 .verifiableCredential(finalVerifiableCertificationData)
                 .jwtId(UUID.randomUUID().toString())
                 .build();
     }
 
-    private long parseDateToUnixTime(String date) {
-        ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-        return zonedDateTime.toInstant().getEpochSecond();
-    }
 }

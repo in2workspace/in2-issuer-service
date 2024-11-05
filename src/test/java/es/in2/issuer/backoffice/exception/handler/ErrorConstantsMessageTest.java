@@ -1,6 +1,5 @@
-package es.in2.issuer.exception;
+package es.in2.issuer.backoffice.exception.handler;
 
-import es.in2.issuer.backoffice.exception.handler.ErrorConstantsMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
