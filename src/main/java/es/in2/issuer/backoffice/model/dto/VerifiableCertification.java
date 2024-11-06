@@ -23,6 +23,7 @@ public record VerifiableCertification(
         @JsonProperty("expirationDate") String expirationDate,
         @JsonProperty("signer") Signer signer
 ) implements VerifiableCredential {
+        
     @Builder
     public record Issuer(
             @JsonProperty("commonName") String commonName,
@@ -38,6 +39,7 @@ public record VerifiableCertification(
             @JsonProperty("compliance") List<Compliance> compliance,
             @JsonProperty("product") Product product
     ) {
+            
         @Builder
         public record Company(
                 @JsonProperty("address") String address,
@@ -76,4 +78,5 @@ public record VerifiableCertification(
             @JsonProperty("serialNumber") String serialNumber
     ) {
     }
+        
 }
