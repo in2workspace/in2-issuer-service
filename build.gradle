@@ -54,14 +54,16 @@ dependencies {
     // Database
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
 
     // JWT
     implementation 'com.nimbusds:nimbus-jose-jwt:9.42'
 
+    // Monitoring
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    
     // Devtools
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
 
     // Testing
