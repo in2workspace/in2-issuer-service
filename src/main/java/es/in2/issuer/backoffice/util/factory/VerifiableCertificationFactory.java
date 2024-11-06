@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.UUID;
 
-import static es.in2.issuer.backoffice.util.Utils.parseIsoZonedDataTimeToUnixTimestamp;
+import static es.in2.issuer.backoffice.util.ApplicationUtils.parseIsoZonedDataTimeToUnixTimestamp;
 
 @Slf4j
 @Component

@@ -5,6 +5,7 @@ import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee;
 import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee.CredentialSubject.Mandate;
 import es.in2.issuer.backoffice.model.dto.LEARCredentialEmployee.CredentialSubject.Mandate.Power;
+import es.in2.issuer.backoffice.model.enums.DidMethods;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
 import org.junit.jupiter.api.Test;
@@ -77,14 +78,14 @@ class LEARCredentialEmployeeFactoryTest {
 
         // Validate Credential contents
         assertNotNull(credential);
-        assertEquals("did:elsi" + mandateMock.mandator().organizationIdentifier(), credential.issuer());
+        assertEquals(DidMethods.DID_ELSI.getValue() + mandateMock.mandator().organizationIdentifier(), credential.issuer());
         assertEquals("Jhon", learCredentialEmployee.credentialSubject().mandate().mandatee().firstName());
         assertEquals(SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue(), learCredentialEmployee.type().get(0));
 
         // Check expiration and issuance dates within expected time range
         Instant now = Instant.now();
         assertTrue(credential.issuedAt() <= now.getEpochSecond());
-        assertTrue(credential.expirationTime() >= now.plus(29, ChronoUnit.DAYS).getEpochSecond());
+        assertTrue(credential.expirationTime() >= now.plus(365, ChronoUnit.DAYS).getEpochSecond());
 
     }
 }

@@ -3,6 +3,7 @@ package es.in2.issuer.backoffice.util.factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.LEARCredentialMachine;
+import es.in2.issuer.backoffice.model.enums.DidMethods;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
 import org.junit.jupiter.api.Test;
@@ -77,14 +78,14 @@ class LEARCredentialMachineFactoryTest {
 
         // Validate Credential contents
         assertNotNull(credential);
-        assertEquals("did:elsi" + mandateMock.mandator().organizationIdentifier(), credential.issuer());
+        assertEquals(DidMethods.DID_ELSI.getValue() + mandateMock.mandator().organizationIdentifier(), credential.issuer());
         assertEquals("service name", learCredentialMachine.credentialSubject().mandate().mandatee().serviceName());
         assertEquals(SupportedCredentialTypes.LEAR_CREDENTIAL_MACHINE.getValue(), learCredentialMachine.type().get(0));
 
         // Check expiration and issuance dates within expected time range
         Instant now = Instant.now();
         assertTrue(credential.issuedAt() <= now.getEpochSecond());
-        assertTrue(credential.expirationTime() >= now.plus(29, ChronoUnit.DAYS).getEpochSecond());
+        assertTrue(credential.expirationTime() >= now.plus(365, ChronoUnit.DAYS).getEpochSecond());
 
     }
 }

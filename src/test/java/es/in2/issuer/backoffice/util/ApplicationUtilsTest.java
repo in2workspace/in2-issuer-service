@@ -10,12 +10,12 @@ import java.lang.reflect.InvocationTargetException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class UtilsTest {
+class ApplicationUtilsTest {
 
     @Test
     void testConstructorThrowsException() {
         try {
-            Constructor<Utils> constructor = Utils.class.getDeclaredConstructor();
+            Constructor<ApplicationUtils> constructor = ApplicationUtils.class.getDeclaredConstructor();
             constructor.setAccessible(true);
             Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
             assertInstanceOf(IllegalStateException.class, exception.getCause());
@@ -32,7 +32,7 @@ class UtilsTest {
 
         // When parsed to Unix timestamp
         long expectedTimestamp = 1730764800L; // Corresponds to 2024-11-05T12:30:00Z in Unix time
-        long actualTimestamp = Utils.parseIsoZonedDataTimeToUnixTimestamp(isoZonedDateTime);
+        long actualTimestamp = ApplicationUtils.parseIsoZonedDataTimeToUnixTimestamp(isoZonedDateTime);
 
         // Then the parsed Unix timestamp should match the expected value
         assertEquals(expectedTimestamp, actualTimestamp, "The Unix timestamp should match the expected value");
@@ -45,7 +45,7 @@ class UtilsTest {
 
         // When parsed to Unix timestamp
         long expectedTimestamp = 1730761200L; // The same as 2024-11-05T12:30:00Z in Unix time
-        long actualTimestamp = Utils.parseIsoZonedDataTimeToUnixTimestamp(isoZonedDateTimeWithOffset);
+        long actualTimestamp = ApplicationUtils.parseIsoZonedDataTimeToUnixTimestamp(isoZonedDateTimeWithOffset);
 
         // Then the parsed Unix timestamp should match the expected value
         assertEquals(expectedTimestamp, actualTimestamp, "The Unix timestamp should match the expected value even with timezone offset");
@@ -59,7 +59,7 @@ class UtilsTest {
         // Expecting an exception when parsed
         assertThrows(
                 java.time.format.DateTimeParseException.class,
-                () -> Utils.parseIsoZonedDataTimeToUnixTimestamp(invalidDate),
+                () -> ApplicationUtils.parseIsoZonedDataTimeToUnixTimestamp(invalidDate),
                 "Expected DateTimeParseException to be thrown for invalid date format"
         );
     }
