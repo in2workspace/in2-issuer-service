@@ -20,12 +20,13 @@ public class CredentialFactoryAdapter {
     public Credential createCredential(CredentialRequest credentialRequest) {
         return switch (credentialRequest.schema()) {
             case "LEARCredentialEmployee" ->
-                    learCredentialEmployeeFactory.createCredential(credentialRequest.payload());
-            case "LEARCredentialMachine" -> learCredentialMachineFactory.createCredential(credentialRequest.payload());
+                learCredentialEmployeeFactory.createCredential(credentialRequest.payload());
+            case "LEARCredentialMachine" -> 
+                learCredentialMachineFactory.createCredential(credentialRequest.payload());
             case "VerifiableCertification" ->
-                    verifiableCertificationFactory.createCredential(credentialRequest.payload());
+                verifiableCertificationFactory.createCredential(credentialRequest.payload());
             default ->
-                    throw new UnsupportedSchemaException("Schema: " + credentialRequest.schema() + " is not supported");
+                throw new UnsupportedSchemaException("Schema: " + credentialRequest.schema() + " is not supported");
         };
     }
 
