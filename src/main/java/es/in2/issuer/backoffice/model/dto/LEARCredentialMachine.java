@@ -17,6 +17,7 @@ public record LEARCredentialMachine(
         @JsonProperty("issuer") String issuer,
         @JsonProperty("validFrom") String validFrom
 ) implements VerifiableCredential {
+        
     @Builder
     public record CredentialSubject(
             @JsonProperty("mandate") Mandate mandate
@@ -31,6 +32,7 @@ public record LEARCredentialMachine(
                 @JsonProperty("power") List<Power> power,
                 @JsonProperty("signer") Signer signer
         ) {
+                
             @Builder
             public record LifeSpan(
                     @JsonProperty("end_date_time") String endDateTime,
@@ -49,12 +51,14 @@ public record LEARCredentialMachine(
                     @JsonProperty("description") String description,
                     @JsonProperty("contact") Contact contact
             ) {
+                    
                 @Builder
                 public record Contact(
                         @JsonProperty("email") String email,
                         @JsonProperty("phone") String phone
                 ) {
                 }
+                    
             }
 
             @Builder
