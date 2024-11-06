@@ -3,8 +3,9 @@ package es.in2.issuer.backoffice.util;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Utils {
-    private Utils() {
+public class ApplicationUtils {
+    
+    private ApplicationUtils() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -12,4 +13,5 @@ public class Utils {
         ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, DateTimeFormatter.ISO_ZONED_DATE_TIME);
         return zonedDateTime.toInstant().getEpochSecond();
     }
+    
 }
