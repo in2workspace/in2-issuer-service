@@ -32,11 +32,11 @@ public class LEARCredentialEmployeeFactory {
 
         List<LEARCredentialEmployee.CredentialSubject.Mandate.Power> powerList = mandate.power().stream()
                 .map(power -> LEARCredentialEmployee.CredentialSubject.Mandate.Power.builder()
-                        .id(UUID.randomUUID().toString())
+                        .id(UUID.randomUUID().toString())      
                         .tmfType(power.tmfType())
-                        .tmfAction(power.tmfAction())
                         .tmfDomain(power.tmfDomain())
-                        .tmfFunction(power.tmfFunction())
+                        .tmfFunction(power.tmfFunction())   
+                        .tmfAction(power.tmfAction())
                         .build())
                 .toList();
 
@@ -65,7 +65,7 @@ public class LEARCredentialEmployeeFactory {
                 .type(List.of(
                         SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue(),
                         VERIFIABLE_CREDENTIAL_TYPE))
-                .issuer(DidMethods.DID_ELSI.getValue() + mandate.mandator().organizationIdentifier())
+                .issuer(DidMethods.DID_ELSI.getName() + mandate.mandator().organizationIdentifier())
                 .credentialSubject(learCredentialEmployeeCredentialSubject)
                 .build();
 
