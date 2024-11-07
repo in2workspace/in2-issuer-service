@@ -60,4 +60,30 @@ public class IssuerMetadataServiceImpl implements IssuerMetadataService {
                 .credentialConfigurationsSupported(credentialConfigurations)
                 .build();
     }
+
+    @Override
+    public boolean hasCryptographicBindingWithDidKey(String credentialType) {
+        IssuerMetadata issuerMetadata = getIssuerMetadata();
+        Map<String, IssuerMetadata.CredentialConfiguration> configurations = issuerMetadata.credentialConfigurationsSupported();
+        boolean credentialTypeSupported = false;
+
+        for (IssuerMetadata.CredentialConfiguration config : configurations.values()) {
+            // Check if the credential type is in the configuration's types
+            if (config.credentialDefinition().type().contains(credentialType)) {
+                credentialTypeSupported = true;
+                List<String> bindingMethods = config.cryptographicBindingMethodsSupported();
+                // Check if the binding method includes "did:key"
+                if (bindingMethods != null && bindingMethods.contains(DidMethods.DID_KEY.getName())) {
+                    return true;
+                }
+            }
+        }
+
+        // If credential type was not found in any configuration, throw an exception
+        if (!credentialTypeSupported) {
+            throw new IllegalArgumentException("Credential type '" + credentialType + "' is not supported.");
+        }
+
+        return false;
+    }
 }

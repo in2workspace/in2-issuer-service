@@ -2,7 +2,9 @@ package es.in2.issuer.backoffice.workflow.impl;
 
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.CredentialRequest;
+import es.in2.issuer.backoffice.model.enums.OperationMode;
 import es.in2.issuer.backoffice.util.factory.CredentialFactoryAdapter;
+import es.in2.issuer.oidc4vci.service.IssuerMetadataService;
 import es.in2.issuer.shared.security.service.PolicyAuthorizationService;
 import es.in2.issuer.backoffice.workflow.CredentialIssuanceWorkflow;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ public class CredentialIssuanceWorkflowImpl implements CredentialIssuanceWorkflo
 
     private final PolicyAuthorizationService policyAuthorizationService;
     private final CredentialFactoryAdapter credentialFactoryAdapter;
+    private final IssuerMetadataService issuerMetadataService;
 
     @Override
     public void issueCredential(String authorizationHeader, CredentialRequest credentialRequest) {
@@ -38,12 +41,23 @@ public class CredentialIssuanceWorkflowImpl implements CredentialIssuanceWorkflo
             // else
                 // sign Credential and return VerifiableCredential object
 
+        String ProcedureDataEncoded = null;
+        if(credentialRequest.operation_mode().equals(OperationMode.S) ||
+                !issuerMetadataService.hasCryptographicBindingWithDidKey(credentialRequest.schema())){
+            // Sign credential using DSS
+            ProcedureDataEncoded = "signed credential";
+        }
+
         // 3. Create a Procedure (the procedure is used to track the progress of the credential issuance).
             // ProcedureType: CREDENTIAL_ISSUANCE (constant)
             // ProcedureStatus:
             // ProcedureDataDecoded: JSON object (Credential)
             // ProcedureDataEncoded: JWT (Verifiable Credential)
 
+        // 4. Generate transaction_code and send credential offer email
+            // Generate random transaction_code
+            // Save transaction_code and procedure_id in cache
+            // Send credential offer email with link to UI (transaction_code)
     }
 
 }
