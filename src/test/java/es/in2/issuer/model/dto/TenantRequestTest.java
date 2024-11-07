@@ -1,6 +1,7 @@
 package es.in2.issuer.model.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import es.in2.issuer.backoffice.model.dto.TenantRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -8,6 +9,7 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +22,7 @@ class TenantRequestTest {
 
     @BeforeAll
     static void setUpValidator() {
+        Locale.setDefault(Locale.ENGLISH);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }

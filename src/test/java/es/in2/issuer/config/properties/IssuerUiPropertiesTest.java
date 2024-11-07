@@ -1,11 +1,13 @@
 package es.in2.issuer.config.properties;
 
+import es.in2.issuer.shared.config.properties.IssuerUiProperties;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,6 +19,7 @@ class IssuerUiPropertiesTest {
 
     @BeforeEach
     void setUp() {
+        Locale.setDefault(Locale.ENGLISH);
         validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 
