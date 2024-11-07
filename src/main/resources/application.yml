@@ -10,11 +10,16 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: admin
+    password: postgres
     driver-class-name: org.postgresql.Driver
   flyway:
-    url:
+    url: jdbc:postgresql://localhost:5432/postgres
     locations: classpath:db/migration
+    user: postgres
+    password: postgres
+
+server:
+  port: 8080
 
 issuer-ui:
   url: http://localhost:4200
