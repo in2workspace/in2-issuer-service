@@ -35,8 +35,8 @@ public class LEARCredentialMachineFactory {
                         .id(UUID.randomUUID().toString())
                         .tmfType(power.tmfType())
                         .tmfDomain(power.tmfDomain())
-                        .tmfAction(power.tmfAction())
                         .tmfFunction(power.tmfFunction())
+                        .tmfAction(power.tmfAction())
                         .build())
                 .toList();
 
