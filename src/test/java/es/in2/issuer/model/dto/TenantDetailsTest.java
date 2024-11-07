@@ -1,7 +1,7 @@
 package es.in2.issuer.model.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import es.in2.issuer.backoffice.model.dto.TenantDetails;
+import es.in2.issuer.shared.tenant.model.TenantDetails;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

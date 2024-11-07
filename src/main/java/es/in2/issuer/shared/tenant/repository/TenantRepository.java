@@ -1,6 +1,6 @@
-package es.in2.issuer.backoffice.repository;
+package es.in2.issuer.shared.tenant.repository;
 
-import es.in2.issuer.backoffice.model.entity.Tenant;
+import es.in2.issuer.shared.tenant.model.Tenant;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

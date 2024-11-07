@@ -1,6 +1,6 @@
 package es.in2.issuer.model.entity;
 
-import es.in2.issuer.backoffice.model.entity.Tenant;
+import es.in2.issuer.shared.tenant.model.Tenant;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

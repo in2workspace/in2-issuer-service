@@ -1,4 +1,4 @@
-package es.in2.issuer.backoffice.exception;
+package es.in2.issuer.shared.tenant.exception;
 
 public class TenantAlreadyExistException extends RuntimeException {
 

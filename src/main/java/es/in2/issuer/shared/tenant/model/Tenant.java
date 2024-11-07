@@ -1,4 +1,4 @@
-package es.in2.issuer.backoffice.model.entity;
+package es.in2.issuer.shared.tenant.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

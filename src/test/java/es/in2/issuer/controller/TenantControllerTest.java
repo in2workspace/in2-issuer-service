@@ -1,10 +1,10 @@
 package es.in2.issuer.controller;
 
-import es.in2.issuer.backoffice.controller.TenantController;
-import es.in2.issuer.backoffice.model.dto.TenantDetails;
-import es.in2.issuer.backoffice.model.dto.TenantRequest;
-import es.in2.issuer.backoffice.model.dto.TenantResponse;
-import es.in2.issuer.backoffice.service.TenantService;
+import es.in2.issuer.shared.tenant.controller.TenantController;
+import es.in2.issuer.shared.tenant.model.TenantDetails;
+import es.in2.issuer.shared.tenant.model.TenantRequest;
+import es.in2.issuer.shared.tenant.model.TenantResponse;
+import es.in2.issuer.shared.tenant.service.TenantService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

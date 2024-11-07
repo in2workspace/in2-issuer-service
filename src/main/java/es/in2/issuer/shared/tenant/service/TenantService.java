@@ -1,8 +1,8 @@
-package es.in2.issuer.backoffice.service;
+package es.in2.issuer.shared.tenant.service;
 
-import es.in2.issuer.backoffice.model.dto.TenantDetails;
-import es.in2.issuer.backoffice.model.dto.TenantRequest;
-import es.in2.issuer.backoffice.model.dto.TenantResponse;
+import es.in2.issuer.shared.tenant.model.TenantDetails;
+import es.in2.issuer.shared.tenant.model.TenantRequest;
+import es.in2.issuer.shared.tenant.model.TenantResponse;
 
 public interface TenantService {
 

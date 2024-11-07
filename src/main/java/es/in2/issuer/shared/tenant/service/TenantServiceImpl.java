@@ -1,12 +1,11 @@
-package es.in2.issuer.backoffice.service.impl;
+package es.in2.issuer.shared.tenant.service;
 
-import es.in2.issuer.backoffice.exception.TenantAlreadyExistException;
-import es.in2.issuer.backoffice.model.dto.TenantDetails;
-import es.in2.issuer.backoffice.model.dto.TenantRequest;
-import es.in2.issuer.backoffice.model.dto.TenantResponse;
-import es.in2.issuer.backoffice.model.entity.Tenant;
-import es.in2.issuer.backoffice.repository.TenantRepository;
-import es.in2.issuer.backoffice.service.TenantService;
+import es.in2.issuer.shared.tenant.exception.TenantAlreadyExistException;
+import es.in2.issuer.shared.tenant.repository.TenantRepository;
+import es.in2.issuer.shared.tenant.model.Tenant;
+import es.in2.issuer.shared.tenant.model.TenantDetails;
+import es.in2.issuer.shared.tenant.model.TenantRequest;
+import es.in2.issuer.shared.tenant.model.TenantResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

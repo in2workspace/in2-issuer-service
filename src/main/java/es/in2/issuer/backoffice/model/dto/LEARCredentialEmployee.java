@@ -17,6 +17,7 @@ public record LEARCredentialEmployee(
         @JsonProperty("issuer") String issuer,
         @JsonProperty("validFrom") String validFrom
 ) implements VerifiableCredential {
+
     @Builder
     public record CredentialSubject(
             @JsonProperty("mandate") Mandate mandate

@@ -1,9 +1,9 @@
-package es.in2.issuer.backoffice.controller;
+package es.in2.issuer.shared.tenant.controller;
 
-import es.in2.issuer.backoffice.model.dto.TenantDetails;
-import es.in2.issuer.backoffice.model.dto.TenantRequest;
-import es.in2.issuer.backoffice.model.dto.TenantResponse;
-import es.in2.issuer.backoffice.service.TenantService;
+import es.in2.issuer.shared.tenant.model.TenantDetails;
+import es.in2.issuer.shared.tenant.model.TenantRequest;
+import es.in2.issuer.shared.tenant.model.TenantResponse;
+import es.in2.issuer.shared.tenant.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

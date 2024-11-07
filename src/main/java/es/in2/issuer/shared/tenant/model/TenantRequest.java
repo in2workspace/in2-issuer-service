@@ -1,4 +1,4 @@
-package es.in2.issuer.backoffice.model.dto;
+package es.in2.issuer.shared.tenant.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
