@@ -78,7 +78,7 @@ class LEARCredentialMachineFactoryTest {
 
         // Validate Credential contents
         assertNotNull(credential);
-        assertEquals(DidMethods.DID_ELSI.getValue() + mandateMock.mandator().organizationIdentifier(), credential.issuer());
+        assertEquals(DidMethods.DID_ELSI.getName() + mandateMock.signer().organizationIdentifier(), credential.issuer());
         assertEquals("service name", learCredentialMachine.credentialSubject().mandate().mandatee().serviceName());
         assertEquals(SupportedCredentialTypes.LEAR_CREDENTIAL_MACHINE.getValue(), learCredentialMachine.type().get(0));
 

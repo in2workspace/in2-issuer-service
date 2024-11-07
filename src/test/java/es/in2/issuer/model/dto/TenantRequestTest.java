@@ -9,6 +9,7 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,6 +22,7 @@ class TenantRequestTest {
 
     @BeforeAll
     static void setUpValidator() {
+        Locale.setDefault(Locale.ENGLISH);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }

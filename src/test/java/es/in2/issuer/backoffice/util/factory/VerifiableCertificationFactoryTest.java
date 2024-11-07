@@ -3,6 +3,7 @@ package es.in2.issuer.backoffice.util.factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.VerifiableCertification;
+import es.in2.issuer.backoffice.model.enums.DidMethods;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
 import org.junit.jupiter.api.Test;
@@ -75,7 +76,7 @@ class VerifiableCertificationFactoryTest {
 
         // Validate Credential contents
         assertNotNull(credential);
-        assertEquals("id-1234", credential.issuer());
+        assertEquals(DidMethods.DID_ELSI.getName()+"appConfiguration.getSignerOrganizationIdentifier()", credential.issuer());
         assertEquals("productId", verifiableCertification.credentialSubject().product().productId());
         assertEquals(SupportedCredentialTypes.VERIFIABLE_CERTIFICATION.getValue(), verifiableCertification.type().get(0));
 

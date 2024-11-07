@@ -3,6 +3,7 @@ package es.in2.issuer.backoffice.util.factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.in2.issuer.backoffice.model.dto.Credential;
 import es.in2.issuer.backoffice.model.dto.VerifiableCertification;
+import es.in2.issuer.backoffice.model.enums.DidMethods;
 import es.in2.issuer.backoffice.model.enums.SupportedCredentialTypes;
 import jakarta.validation.Payload;
 import lombok.RequiredArgsConstructor;
@@ -50,12 +51,17 @@ public class VerifiableCertificationFactory {
 
         // Build the final VerifiableCertificationData object
         VerifiableCertification finalVerifiableCertificationData = VerifiableCertification.builder()
-                .context(List.of("https://www.w3.org/ns/credentials/v2", "https://dome-marketplace.eu/2022/credentials/learcredential/v1"))
+                .context(List.of("https://www.w3.org/ns/credentials/v2", "https://trust-framework.dome-marketplace.eu/credentials/verifiablecertification/v1"))
                 .id(UUID.randomUUID().toString())
                 .type(List.of(
                         SupportedCredentialTypes.VERIFIABLE_CERTIFICATION.getValue(),
                         VERIFIABLE_CREDENTIAL_TYPE))
-                .issuer(verifiableCertificationData.issuer())
+                .issuer(VerifiableCertification.Issuer.builder()
+                        .id(DidMethods.DID_ELSI.getName() + signer.organizationIdentifier())
+                        .country(signer.country())
+                        .commonName(signer.commonName())
+                        .organization(signer.organization())
+                        .build())
                 .credentialSubject(VerifiableCertification.CredentialSubject.builder()
                         .company(verifiableCertificationData.credentialSubject().company())
                         .product(verifiableCertificationData.credentialSubject().product())

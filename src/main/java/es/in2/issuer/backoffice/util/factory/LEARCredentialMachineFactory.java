@@ -57,7 +57,7 @@ public class LEARCredentialMachineFactory {
                 .build();
 
         LEARCredentialMachine learCredentialMachine = LEARCredentialMachine.builder()
-                .context(List.of("https://www.w3.org/ns/credentials/v2", "https://dome-marketplace.eu/2022/credentials/learcredential/v1"))
+                .context(List.of("https://www.w3.org/ns/credentials/v2", "https://trust-framework.dome-marketplace.eu/credentials/learcredentialmachine/v1"))
                 .id(UUID.randomUUID().toString())
                 .expirationDate(currentTime.plus(365, ChronoUnit.DAYS).toString()) // tod: credential expiration from config
                 .issuanceDate(currentTime.toString())
@@ -65,7 +65,7 @@ public class LEARCredentialMachineFactory {
                 .type(List.of(
                         SupportedCredentialTypes.LEAR_CREDENTIAL_MACHINE.getValue(),
                         VERIFIABLE_CREDENTIAL_TYPE))
-                .issuer(DidMethods.DID_ELSI.getValue() + mandate.mandator().organizationIdentifier())
+                .issuer(DidMethods.DID_ELSI.getName() + mandate.signer().organizationIdentifier())
                 .credentialSubject(learCredentialMachineCredentialSubject)
                 .build();
 
