@@ -9,7 +9,8 @@ public enum SupportedCredentialTypes {
 
     LEAR_CREDENTIAL_EMPLOYEE("LEARCredentialEmployee"),
     LEAR_CREDENTIAL_MACHINE("LEARCredentialMachine"),
-    VERIFIABLE_CERTIFICATION("VerifiableCertification");
+    VERIFIABLE_CERTIFICATION("VerifiableCertification"),
+    VERIFIABLE_CREDENTIAL("VerifiableCredential");
 
     private final String value;
 
