@@ -10,6 +10,6 @@ public enum DidMethods {
     DID_ELSI("did:elsi:"),
     DID_KEY("did:key:");
 
-    private final String value;
+    private final String name;
 
 }
