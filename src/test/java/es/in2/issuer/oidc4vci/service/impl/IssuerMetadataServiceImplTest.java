@@ -61,4 +61,22 @@ class IssuerMetadataServiceImplTest {
         assertNotNull(verifiableCertificationConfig.credentialDefinition(), "Credential definition should not be null");
         assertEquals(List.of(SupportedCredentialTypes.VERIFIABLE_CERTIFICATION.getValue(), SupportedCredentialTypes.VERIFIABLE_CREDENTIAL.getValue()), verifiableCertificationConfig.credentialDefinition().type(), "Credential types should be VERIFIABLE_CERTIFICATION and VERIFIABLE_CREDENTIAL");
     }
+
+    @Test
+    void testHasCryptographicBindingWithDidKey() {
+        // Case 1: Credential type with cryptographic binding (should return true)
+        assertTrue(issuerMetadataService.hasCryptographicBindingWithDidKey(SupportedCredentialTypes.LEAR_CREDENTIAL_EMPLOYEE.getValue()),
+                "Expected LEAR_CREDENTIAL_EMPLOYEE to have cryptographic binding with did:key");
+
+        // Case 2: Credential type without cryptographic binding (should return false)
+        assertFalse(issuerMetadataService.hasCryptographicBindingWithDidKey(SupportedCredentialTypes.LEAR_CREDENTIAL_MACHINE.getValue()),
+                "Expected LEAR_CREDENTIAL_MACHINE to not have cryptographic binding with did:key");
+
+        // Case 3: Unsupported credential type (should throw IllegalArgumentException)
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                        issuerMetadataService.hasCryptographicBindingWithDidKey("UNSUPPORTED_CREDENTIAL_TYPE"),
+                "Expected an IllegalArgumentException for unsupported credential type");
+
+        assertEquals("Credential type 'UNSUPPORTED_CREDENTIAL_TYPE' is not supported.", exception.getMessage());
+    }
 }
