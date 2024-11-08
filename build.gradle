@@ -56,6 +56,9 @@ dependencies {
     implementation 'org.flywaydb:flyway-database-postgresql'
     runtimeOnly 'org.postgresql:postgresql'
 
+    // Cache
+    implementation 'com.google.guava:guava:33.3.1-jre'
+
     // JWT
     implementation 'com.nimbusds:nimbus-jose-jwt:9.42'
 
