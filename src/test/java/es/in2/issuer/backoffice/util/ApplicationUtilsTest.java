@@ -63,4 +63,24 @@ class ApplicationUtilsTest {
                 "Expected DateTimeParseException to be thrown for invalid date format"
         );
     }
+
+    @Test
+    void testGenerateNonce() {
+        // Generate two nonces
+        String nonce1 = ApplicationUtils.generateNonce();
+        String nonce2 = ApplicationUtils.generateNonce();
+
+        // Check that each nonce is 22 characters long
+        assertEquals(22, nonce1.length(), "Nonce should be 22 characters long");
+        assertEquals(22, nonce2.length(), "Nonce should be 22 characters long");
+
+        // Check that the nonces are not null or empty
+        assertNotNull(nonce1, "Nonce should not be null");
+        assertNotNull(nonce2, "Nonce should not be null");
+        assertFalse(nonce1.isEmpty(), "Nonce should not be empty");
+        assertFalse(nonce2.isEmpty(), "Nonce should not be empty");
+
+        // Check that two generated nonces are not the same
+        assertNotEquals(nonce1, nonce2, "Each nonce should be unique");
+    }
 }
