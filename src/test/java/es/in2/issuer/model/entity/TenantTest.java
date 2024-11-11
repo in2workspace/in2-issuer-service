@@ -1,5 +1,6 @@
 package es.in2.issuer.model.entity;
 
+import es.in2.issuer.domain.model.entity.Tenant;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

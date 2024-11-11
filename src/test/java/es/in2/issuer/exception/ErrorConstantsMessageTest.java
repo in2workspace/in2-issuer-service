@@ -1,5 +1,6 @@
 package es.in2.issuer.exception;
 
+import es.in2.issuer.domain.exception.ErrorConstantsMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

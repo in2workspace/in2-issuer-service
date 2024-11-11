@@ -1,6 +1,7 @@
 package es.in2.issuer.model.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import es.in2.issuer.domain.model.dto.TenantRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

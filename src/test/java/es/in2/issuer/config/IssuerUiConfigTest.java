@@ -1,7 +1,8 @@
 package es.in2.issuer.config;
 
-import es.in2.issuer.config.impl.IssuerUiConfigImpl;
-import es.in2.issuer.config.properties.IssuerUiProperties;
+import es.in2.issuer.infrastructure.configuration.IssuerUiConfig;
+import es.in2.issuer.infrastructure.configuration.impl.IssuerUiConfigImpl;
+import es.in2.issuer.infrastructure.configuration.properties.IssuerUiProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
